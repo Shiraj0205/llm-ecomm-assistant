@@ -7,7 +7,7 @@ from utils.config_loader import load_config
 from dotenv import load_dotenv
 
 
-class RetrieverClass:
+class Retriever:
     """
     Retriever class to handle document retrieval from AstraDB using vector embeddings.
     """
@@ -64,7 +64,7 @@ class RetrieverClass:
 
 
 if __name__ == "__main__":
-    retriever = RetrieverClass()
+    retriever = Retriever()
     #user_query = "What are the best products for outdoor activities?"
     user_query = "Can you suggest good budget iPhone under 1,00,00 INR?"
     retriever.load_retriever()
