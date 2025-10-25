@@ -51,7 +51,22 @@ class Retriever:
         
         top_k = self.config["retriever"]["top_k"] if "retriever" in self.config else 5
         if not self.retriever:
-            retriever = self.vector_store.as_retriever(search_type="similarity", search_kwargs={"k": top_k})
+            ## Maximal Marginal Relevance (MMR) Retriever
+            retriever = self.vector_store.as_retriever(
+                search_type="mmr", 
+                search_kwargs={
+                    "k": top_k,
+                    "fetch_k": 20,
+                    "lambda_mult": 0.7,
+                    "score_threshold": 0.3
+                    })
+            
+            ## Alternative: Similarity Search Retriever
+            # retriever = self.vector_store.as_retriever(
+            #     search_type="similarity",
+            #     search_kwargs={"k": top_k}
+            # )
+            
             print("Retriever loaded successfully.")
             return retriever
 
